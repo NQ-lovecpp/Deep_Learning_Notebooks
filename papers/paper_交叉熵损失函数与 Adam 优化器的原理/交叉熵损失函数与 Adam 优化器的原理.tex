@@ -1,0 +1,125 @@
+\documentclass[11pt]{ctexart} % 使用 ctexart 支持中文
+\usepackage{amsmath, amssymb}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.17}
+\usepackage{geometry}
+\usepackage{caption}
+\geometry{a4paper, margin=1in}
+
+\title{交叉熵损失函数与 Adam 优化器的原理}
+\author{作者姓名}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+本文介绍了机器学习中常用的两种概念：交叉熵损失函数与 Adam 优化器。我们将详细讨论它们的数学原理，并通过图表来辅助理解，例如通过绘制 $-\log(x)$ 函数的曲线来直观展示交叉熵中 \(-\log\) 部分的特性。此外，我们还会可视化 Adam 优化器的梯度更新路径，以帮助理解其自适应性特点。
+\end{abstract}
+
+\section{引言}
+在机器学习和深度学习中，损失函数与优化器是模型训练的重要组成部分。交叉熵损失函数常用于分类任务，其目标是衡量预测概率分布与真实分布之间的差异；而 Adam 优化器则是一种基于梯度的一阶和二阶矩估计自适应调整学习率的方法。本文旨在系统地阐述这两个概念的原理，并借助图表进行说明。
+
+\section{交叉熵损失函数}
+交叉熵损失函数用于衡量模型输出的概率分布与真实标签分布之间的差异。在二分类问题中，其定义为：
+\begin{align}
+L &= - \left[ y \log \hat{y} + (1-y) \log (1-\hat{y}) \right],
+\end{align}
+其中 \(y\in\{0,1\}\) 表示真实标签，\(\hat{y}\) 为模型预测的概率。
+
+对于多分类问题，假设真实标签经过独热编码，交叉熵损失函数为：
+\begin{align}
+L &= - \sum_{i=1}^{C} y_i \log \hat{y}_i,
+\end{align}
+其中 \(C\) 为类别数，只有真实类别对应的 \(y_i\) 为 1，其余均为 0。
+
+\subsection{图示 1：\texorpdfstring{$-\log(x)$}{-log(x)}函数}
+下面的图表展示了函数 \(f(x) = -\log(x)\) 在 \(x\in (0,1]\) 范围内的曲线：
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    domain=0.01:1,
+    samples=100,
+    xlabel={$x$},
+    ylabel={$f(x)=-\log(x)$},
+    grid=both,
+    width=0.8\textwidth,
+    height=0.5\textwidth,
+    title={函数 $-\log(x)$ 的图像}
+]
+\addplot [blue, thick] { -ln(x) };
+\end{axis}
+\end{tikzpicture}
+\caption{函数 $-\log(x)$ 在区间 $(0.01,1]$ 内的变化曲线}
+\end{figure}
+
+\subsection{图示 2：交叉熵随预测概率变化}
+为了更直观地理解交叉熵的行为，下面的图示展示了在二分类任务中，交叉熵损失随预测概率 \(\hat{y}\) 的变化：
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    domain=0.01:0.99,
+    samples=100,
+    xlabel={$\hat{y}$},
+    ylabel={交叉熵损失},
+    grid=major,
+    width=0.8\textwidth,
+    height=0.5\textwidth,
+    title={交叉熵损失随 $\hat{y}$ 变化}
+]
+\addplot[red, thick] { -ln(x) };
+\addplot[blue, thick] { -ln(1-x) };
+\legend{$y=1$ 时, $y=0$ 时}
+\end{axis}
+\end{tikzpicture}
+\caption{交叉熵损失随预测概率 $\hat{y}$ 变化的曲线}
+\end{figure}
+
+\section{Adam 优化器}
+Adam 优化器结合了动量（Momentum）与 RMSProp 的思想，是一种自适应学习率的优化算法。其核心更新公式如下：
+\begin{align}
+m_t &= \beta_1 m_{t-1} + (1-\beta_1) g_t, \\
+v_t &= \beta_2 v_{t-1} + (1-\beta_2) g_t^2,
+\end{align}
+其中 \(\beta_1\) 和 \(\beta_2\) 分别为动量和均方根的衰减因子。
+
+为了修正偏差：
+\begin{align}
+\hat{m}_t &= \frac{m_t}{1-\beta_1^t}, \quad \hat{v}_t = \frac{v_t}{1-\beta_2^t}.
+\end{align}
+
+最终的参数更新：
+\begin{align}
+\theta_t &= \theta_{t-1} - \frac{\alpha}{\sqrt{\hat{v}_t}+\epsilon}\hat{m}_t.
+\end{align}
+
+\subsection{图示：Adam 优化器梯度更新轨迹}
+下面的图示展示了 Adam 在参数空间中的自适应更新路径：
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    axis lines=middle,
+    xlabel={$x_1$}, ylabel={$x_2$},
+    width=0.7\textwidth, height=0.6\textwidth
+]
+\addplot [thick, blue, mark=*, smooth] coordinates {
+    (-2,-2) (-1.5,-1.2) (-1,-0.5) (-0.5,0.2) (0,0.7) (0.5,1.2) (1,1.4)
+};
+\end{axis}
+\end{tikzpicture}
+\caption{Adam 在参数空间中的更新路径示意图}
+\end{figure}
+
+\section{结论}
+本文介绍了交叉熵损失函数和 Adam 优化器的基本原理，并通过数学公式和图表加深理解。希望这些可视化示例能帮助更直观地理解其数学本质。
+
+\bibliographystyle{plain}
+\bibliography{references}
+
+\end{document}
