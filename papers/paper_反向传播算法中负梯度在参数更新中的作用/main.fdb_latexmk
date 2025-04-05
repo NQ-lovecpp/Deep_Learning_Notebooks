@@ -1,13 +1,13 @@
 # Fdb version 4
-["bibtex main"] 1741933032.3889 "main.aux" "main.bbl" "main" 1741933110.9092 2
+["bibtex main"] 1741948076.398 "main.aux" "main.bbl" "main" 1741948076.88081 2
   "./references.bib" 1741879960 321 ecd8d8c5eaeb3631798ca16cfa7624b0 ""
   "d:/texlive/2024/texmf-dist/bibtex/bst/base/plain.bst" 1737259499 20613 bd3fbfa9f64872b81ac57a0dd2ed855f ""
-  "main.aux" 1741933108 1995 f19e83d520e24fe43dccaf1b8773fa17 "pdflatex"
+  "main.aux" 1741948076 34 3985256e7290058c681f74d7a3565a19 "pdflatex"
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1741933103.47619 "d:/Code/Deep_Learning_Notebooks/papers/paper_反向传播算法中负梯度在参数更新中的作用/main.tex" "main.pdf" "main" 1741933110.91031 2
+["pdflatex"] 1741944470.01477 "d:/Code/Deep_Learning_Notebooks/papers/paper_反向传播算法中负梯度在参数更新中的作用/main.tex" "main.pdf" "main" 1741944474.87203 2
   "c:/Windows/Fonts/msyh.ttc" 1731438052 19704352 1e10e74402e59d54499af795caf0b135 ""
   "c:/Windows/Fonts/simhei.ttf" 1651842600 9753388 6abc0fcfbaa40600f9cecca3afeb3aa7 ""
   "c:/Windows/Fonts/simsun.ttc" 1731438052 18070492 992f2bdc407dde6953c5ed83ceac9a91 ""
@@ -360,9 +360,9 @@
   "d:/texlive/2024/texmf.cnf" 1737260759 713 e69b156964470283e0530f5060668171 ""
   "figures/gradient_3d.tex" 1741879868 1183 f3260e0158accdb5265d7fdc7caa6910 ""
   "figures/loss_surface.tex" 1741879856 425 0897358ddb330e12495a4286a7f8cc16 ""
-  "main.aux" 1741933108 1995 f19e83d520e24fe43dccaf1b8773fa17 "pdflatex"
-  "main.bbl" 1741933033 0 d41d8cd98f00b204e9800998ecf8427e "bibtex main"
-  "main.out" 1741933108 700 094f76ca53e0becf511df3599e035071 "pdflatex"
+  "main.aux" 1741948076 34 3985256e7290058c681f74d7a3565a19 "pdflatex"
+  "main.bbl" 1741948076 0 d41d8cd98f00b204e9800998ecf8427e "bibtex main"
+  "main.out" 0 -1 0 "pdflatex"
   "main.tex" 1741882160 6653 bbe7202bb56649bd27dcc14acbc3a287 ""
   (generated)
   "main.aux"
